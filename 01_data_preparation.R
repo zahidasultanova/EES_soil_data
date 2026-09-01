@@ -12,8 +12,8 @@ library(tidyverse) # dplyr for data manipulation, tidyr for reshaping data, read
 
 ##### Field Survey Dataset #####
 
-data_field <- read_csv("C:/Users/zahid/Dropbox/Job Applications/Natural England/Data Analysis/Year 1 EES Soil SA Field Survey Dataset.csv")
-data_lab <- read_csv("C:/Users/zahid/Dropbox/Job Applications/Natural England/Data Analysis/Year 1 EES Soil SA Lab Biological Dataset CO2 Rate.csv")
+data_field <- read_csv("C:/Users/zahid/Dropbox/Job Applications/Natural England/Data Analysis/data/Year 1 EES Soil SA Field Survey Dataset.csv")
+data_lab <- read_csv("C:/Users/zahid/Dropbox/Job Applications/Natural England/Data Analysis/data/Year 1 EES Soil SA Lab Biological Dataset CO2 Rate.csv")
 
 glimpse(data_field)
 glimpse(data_lab)
@@ -61,6 +61,7 @@ soil_data <- field_small %>%
     by = c("delocated_monad", "plot_number")
   )
 
+write_csv(soil_data, "data/soil_data.csv")
 
 glimpse(soil_data)
 summary(soil_data)
@@ -72,26 +73,7 @@ hist(soil_data$earthworm_num_5min, 60) #check the distribution of the soil worms
 nrow(field_small) # check how many rows the main field data had
 nrow(soil_data) # check how many rows the new joined data has
 
-ggplot(soil_data, aes(x = earthworm_num_5min)) +
-  geom_histogram(binwidth = 1) +
-  labs(
-    x = "Number of earthworms (first 5 min)",
-    y = "Frequency",
-    title = "Distribution of earthworm counts"
-  ) +
-  theme_minimal()
 
-ggplot(soil_data, aes(x = WAT_CO2, y = earthworm_num_5min)) +
-  geom_jitter(width = 0.1, height = 0.15, alpha = 0.5) +
-  geom_smooth(method = "lm", se = TRUE) +
-  labs(
-    x = "X",
-    y = "Number of earthworms",
-    title = "Earthworm abundance vs X"
-  ) +
-  theme_minimal()
 
-table(soil_data$earthworm_num_5min)
-mean(soil_data$earthworm_num_5min == 0, na.rm = TRUE)
 
 
