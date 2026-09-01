@@ -1,4 +1,5 @@
 
+#Checking version control
 
 rm(list = ls()) # clearing the history from previous analyses
 
@@ -83,9 +84,9 @@ ggplot(soil_data, aes(x = WAT_CO2, y = earthworm_num_5min)) +
   geom_jitter(width = 0.1, height = 0.15, alpha = 0.5) +
   geom_smooth(method = "lm", se = TRUE) +
   labs(
-    x = "X",
+    x = "WAT_CO2",
     y = "Number of earthworms",
-    title = "Earthworm abundance vs X"
+    title = "Earthworm abundance vs WAT_CO2"
   ) +
   theme_minimal()
 
